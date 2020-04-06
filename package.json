@@ -1,6 +1,6 @@
 {
   "name": "@joblocal/middy-json-api-error-handler",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A middy middleware to format errors as json api errors.",
   "files": [
     "src"
