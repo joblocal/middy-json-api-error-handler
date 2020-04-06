@@ -1,19 +1,16 @@
 const Sentry = require('@sentry/node');
+const JSONAPIError = require('jsonapi-serializer').Error;
 
 module.exports = () => ({
   onError(handler, next) {
     if (handler.error.statusCode && handler.error.message) {
-        const errorResponse = (errorObject) => JSON.stringify({
-            errors: [errorObject],
-        });
-
-        const body = (typeof handler.error.message === 'string') ?  errorResponse({
-            title: handler.error.message,
-          }) : errorResponse(handler.error.message);
+        const errors = (typeof handler.error.message === 'string') ?  new JSONAPIError({
+          title: handler.error.message,
+        }) : new JSONAPIError(handler.error.message);
 
         handler.response = {
             statusCode: handler.error.statusCode,
-            body,
+            body: JSON.stringify(errors),
         };
 
         return next();

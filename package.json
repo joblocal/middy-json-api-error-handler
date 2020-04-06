@@ -15,6 +15,7 @@
     "jest": "^25.2.4"
   },
   "dependencies": {
-    "@sentry/node": "^5.15.4"
+    "@sentry/node": "^5.15.4",
+    "jsonapi-serializer": "^3.6.6"
   }
 }

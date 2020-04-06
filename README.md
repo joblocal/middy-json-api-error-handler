@@ -16,7 +16,12 @@ const middy = require('middy');
 const jsonApiErrorHandler = require('@joblocal/middy-json-api-error-handler');
 
 const yourHandler = () => {
-  throw new Error('this will be formatted');
+  throw new Error({
+    code: '123',
+    source: { 'pointer': '/data/attributes/first-name' },
+    title: 'Value is too short',
+    detail: 'First name must contain at least three characters.'
+  });
 };
 
 const handler = middy(yourHandler)
